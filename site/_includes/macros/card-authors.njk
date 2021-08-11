@@ -8,15 +8,17 @@
   {% if authors.length < 3 %}
     {% for item in authors %}
       {% set author = postsData.authors[item] %}
-      {% Img
-        class="card-authors__image rounded-full flex-shrink-none width-600 height-600 object-fit-cover",
-        src=author.image,
-        alt=author.title | i18n(lang),
-        width="40",
-        height="40",
-        sizes="40px",
-        options={minWidth: 40, maxWidth: 120}
-      %}
+      <a href="{{ author.url }}" class="card-authors__image-link">
+        {% Img
+          class="card-authors__image rounded-full flex-shrink-none width-600 height-600 object-fit-cover",
+          src=author.image,
+          alt=author.title | i18n(locale),
+          width="40",
+          height="40",
+          sizes="40px",
+          options={minWidth: 40, maxWidth: 120}
+        %}
+      </a>
     {% endfor %}
   {% endif %}
 
@@ -24,7 +26,8 @@
     <p class="type--small">
       {%- for item in authors -%}
         {%- set author = postsData.authors[item] -%}
-        {%- if loop.index0 > 0 -%}, {% endif -%}{{ author.title | i18n(lang) }}
+        {%- if loop.index0 > 0 -%}, {% endif -%}
+        <a href="{{ author.url }}">{{ author.title | i18n(locale) }}</a>
       {%- endfor -%}
     </p>
     <time class="type--small color-secondary-text">{{ helpers.formatDateShort(date, locale) }}</time>

@@ -30,7 +30,7 @@ pagination:
       {% for authorId in item.data.authors %}
       {% set author = postsData.authors[authorId] %}
       <author>
-        <name>{{ author.title | i18n(lang) }}</name>
+        <name>{{ author.title | i18n(locale) }}</name>
       </author>
       {% endfor %}
     {% else %}

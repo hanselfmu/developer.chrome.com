@@ -15,25 +15,11 @@
  */
 
 declare global {
-  export interface VirtualDataField {
-    /**
-     * When the first post was created.
-     */
-    date: Date;
-    /**
-     * Hero image of element.
-     */
-    hero?: string;
-    /**
-     * When the last post was last created.
-     */
-    updated?: Date;
-  }
-
   export interface VirtualCollectionItem {
     description: string;
     elements: FrontMatterData[];
     key: string;
+    locale: string;
     title: string;
     url: string;
   }
