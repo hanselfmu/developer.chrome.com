@@ -16,6 +16,17 @@
 
 const {defaultLocale} = require('../_data/site.json');
 const {i18n} = require('../_filters/i18n');
+const {filterDrafts} = require('../_utils/drafts');
+
+/**
+ * Create additional feeds for these specific tags (in addition to the blog/all).
+ */
+const tags = ['devtools', 'extensions'];
+
+/**
+ * Only include generate a maximum of this many posts in any feed.
+ */
+const MAX_POSTS = 10;
 
 /**
  * Returns an array of `FeedsCollectionItem` to generate the RSS feeds.
@@ -24,12 +35,10 @@ const {i18n} = require('../_filters/i18n');
  * @returns {FeedsCollection} Key value pair of tag name with `FeedsCollectionItem`.
  */
 module.exports = collection => {
-  const MAX_POSTS = 10;
   const posts = collection
     .getAllSorted()
     .reverse()
-    .filter(i => i.data.locale === defaultLocale);
-  const tags = ['devtools', 'extensions'];
+    .filter(i => i.data.locale === defaultLocale && filterDrafts(i));
   /** @type FeedsCollection */
   const feeds = {};
   const blog = [];
